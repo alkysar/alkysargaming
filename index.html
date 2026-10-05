@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="القيصر AlkysarGaming - بثوث Free Fire , بطولات، فعاليات على جواهر مجانية">
+  <title>روابط صفحات القيصر</title>
+  <link rel="icon" href="IMG/alk.logo.png" type="image/png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @property --spot-x {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 0px;
+    }
+
+    @property --spot-y {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 0px;
+    }
+
+    @property --spot-scale {
+      syntax: "<number>";
+      inherits: false;
+      initial-value: 1;
+    }
+
+    body {
+      color: #fff;
+      font-family: 'Tajawal', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow-x: hidden;
+      padding: 2rem;
+    }
+
+    #socialLinks > div {
+      background: linear-gradient(90deg, #1a1a1a 60%, #ff003c22 100%);
+      border-radius: 1.5rem;
+      padding: 1rem 2rem;
+      margin: 0.5rem 0;
+      box-shadow: 0 0 16px #ff003c44;
+      border: 2px solid #ff003c44;
+      transition: transform 0.18s, box-shadow 0.18s, border 0.18s;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #socialLinks > div:hover {
+      transform: scale(1.04) translateY(-2px) rotate(-1deg);
+      box-shadow: 0 0 32px #ff003c, 0 0 0 8px #1a1a1a;
+      border-color: #ff003c;
+      background: linear-gradient(90deg, #1a1a1a 40%, #ff003c55 100%);
+    }
+
+    #socialLinks i {
+      text-shadow: 0 0 12px #ff003c, 0 0 24px #fff2;
+      transition: text-shadow 0.3s ease;
+    }
+
+    /* Individual icon glow colors */
+    .fa-kickstarter-k {
+      color: #22c55e;
+      text-shadow: 0 0 12px #22c55e, 0 0 24px #22c55e99, 0 0 36px #22c55e55;
+    }
+
+    .fa-shopping-cart {
+      color: #fff;
+      text-shadow: 0 0 12px #fff, 0 0 24px #fff9, 0 0 36px #fff5;
+    }
+
+    .fa-youtube {
+      color: #ef4444;
+      text-shadow: 0 0 12px #ef4444, 0 0 24px #ef444499, 0 0 36px #ef444455;
+    }
+
+    .fa-tiktok {
+      color: #000;
+      text-shadow: 0 0 12px #666, 0 0 24px #6669, 0 0 36px #6665;
+    }
+
+    .fa-instagram {
+      color: #ec4899;
+      text-shadow: 0 0 12px #ec4899, 0 0 24px #ec489999, 0 0 36px #ec489955;
+    }
+
+    .fa-whatsapp {
+      color: #16a34a;
+      text-shadow: 0 0 12px #16a34a, 0 0 24px #16a34a99, 0 0 36px #16a34a55;
+    }
+
+    .fa-discord {
+      color: #6f00ff;
+      text-shadow: 0 0 12px #6f00ff, 0 0 24px #6f00ff, 0 0 36px #6f00ff;
+    }
+
+    .fa-facebook {
+      color: #2563eb;
+      text-shadow: 0 0 12px #2563eb, 0 0 24px #2563eb99, 0 0 36px #2563eb55;
+    }
+
+    #socialLinks {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    /* Modal Styling */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    #modal.show {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #modal .bg-white {
+      background: linear-gradient(135deg, #1a1a1a 80%, #ff003c22 100%);
+      color: #fff;
+      border: 3px solid #ff003c;
+      box-shadow: 0 0 32px #ff003c99, 0 0 0 8px #1a1a1a;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+      transform: scale(0.85) rotate(-8deg);
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    #modal.show .bg-white {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    #modal button,
+    #modal a {
+      background: linear-gradient(90deg, #ff003c 0%, #ff6a00 100%);
+      color: #fff !important;
+      border: none;
+      box-shadow: 0 0 16px #ff003c99;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    #modal button:hover,
+    #modal a:hover {
+      background: linear-gradient(90deg, #ff6a00 0%, #ff003c 100%);
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 0 32px #ff003c;
+    }
+
+    #modal .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: #ff003c;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    #modal .close-btn:hover {
+      color: #fff;
+      text-shadow: 0 0 12px #ff003c;
+    }
+
+    #modalImage {
+      max-width: 100%;
+      border-radius: 1rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 0 20px #ff003c66;
+      cursor: zoom-in;
+    }
+
+    #modalImage.hidden {
+      display: none;
+    }
+
+    h2 {
+      color: #fff;
+      text-shadow: 0 0 8px #ff003c, 0 0 16px #ff003c88;
+      letter-spacing: 1.5px;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    h4 {
+      color: #fff;
+      text-shadow: 0 0 8px #ff003c, 0 0 16px #ff003c88;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    section > p {
+      color: #fff;
+      text-shadow: 0 0 8px #ff003c, 0 0 16px #ff003c88;
+      letter-spacing: 1.5px;
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    body {
+      --ink: #f2f2ed;
+      --muted: #b2a7a8;
+      --line: rgba(255, 255, 255, 0.1);
+      --accent: #f04452;
+      --accent-bright: #ff5967;
+      padding: 3.5rem 1.25rem 2rem;
+      color: var(--ink);
+      letter-spacing: 0;
+      background: linear-gradient(125deg, #0c0003, #32000a 28%, #170004 52%, #4d0613 76%, #0d0003);
+      background-size: 300% 300%;
+      animation: red-velvet 37s ease-in-out infinite;
+      isolation: isolate;
+    }
+
+    @keyframes red-velvet {
+      0%, 100% { background-position: 8% 38%; }
+      36% { background-position: 78% 18%; }
+      69% { background-position: 92% 84%; }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        repeating-linear-gradient(132deg, transparent 0 150px, rgba(255, 42, 77, 0.09) 151px 153px, transparent 154px 280px),
+        repeating-linear-gradient(90deg, transparent 0 127px, rgba(255, 255, 255, 0.022) 128px 129px);
+      background-size: 360px 360px, 129px 129px;
+      animation: background-lines 8s linear infinite;
+    }
+
+    @keyframes background-lines {
+      to { background-position: 360px 360px, 129px 129px; }
+    }
+
+    .ambient-haze {
+      position: fixed;
+      inset: -12%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+      filter: blur(80px);
+      contain: strict;
+    }
+
+    .ambient-spot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 58vw;
+      height: 58vw;
+      min-width: 320px;
+      min-height: 320px;
+      border-radius: 50%;
+      opacity: 0.38;
+      background: radial-gradient(circle, var(--spot-color) 0%, transparent 70%);
+      transform: translate3d(var(--spot-x), var(--spot-y), 0) scale(var(--spot-scale));
+      will-change: transform;
+    }
+
+    .spot-scarlet {
+      --spot-color: #D90429;
+      animation: scarlet-orbit 31s ease-in-out -9s infinite;
+    }
+
+    .spot-coral {
+      --spot-color: #EF233C;
+      opacity: 0.3;
+      animation: coral-orbit 43s ease-in-out -27s infinite;
+    }
+
+    .spot-garnet {
+      --spot-color: #8D0801;
+      opacity: 0.42;
+      animation: garnet-orbit 37s ease-in-out -16s infinite;
+    }
+
+    @keyframes scarlet-orbit {
+      0% { --spot-x: -28vw; --spot-y: -20vh; --spot-scale: 0.8; }
+      19% { --spot-x: 12vw; --spot-y: -24vh; --spot-scale: 1.18; }
+      46% { --spot-x: 25vw; --spot-y: 7vh; --spot-scale: 1.4; }
+      73% { --spot-x: -8vw; --spot-y: 25vh; --spot-scale: 0.94; }
+      100% { --spot-x: -28vw; --spot-y: -20vh; --spot-scale: 0.8; }
+    }
+
+    @keyframes coral-orbit {
+      0% { --spot-x: 28vw; --spot-y: -24vh; --spot-scale: 1.18; }
+      31% { --spot-x: 8vw; --spot-y: 12vh; --spot-scale: 0.86; }
+      58% { --spot-x: -25vw; --spot-y: 22vh; --spot-scale: 1.3; }
+      82% { --spot-x: -4vw; --spot-y: -15vh; --spot-scale: 0.92; }
+      100% { --spot-x: 28vw; --spot-y: -24vh; --spot-scale: 1.18; }
+    }
+
+    @keyframes garnet-orbit {
+      0% { --spot-x: -22vw; --spot-y: 25vh; --spot-scale: 0.92; }
+      23% { --spot-x: -2vw; --spot-y: -12vh; --spot-scale: 1.24; }
+      54% { --spot-x: 22vw; --spot-y: -22vh; --spot-scale: 0.82; }
+      79% { --spot-x: 15vw; --spot-y: 18vh; --spot-scale: 1.35; }
+      100% { --spot-x: -22vw; --spot-y: 25vh; --spot-scale: 0.92; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before { animation: none; }
+      .ambient-spot { animation: none; }
+      .ring-rotate,
+      .laser-track,
+      .energy-pulse { animation: none; }
+    }
+
+    .section-container {
+      max-width: 760px;
+    }
+
+    section[data-aos] {
+      animation: page-arrive 0.65s ease both;
+    }
+
+    @keyframes page-arrive {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .profile-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto 2rem;
+    }
+
+    .logo-frame {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      isolation: isolate;
+    }
+
+    .profile-logo {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      border: 2px solid rgba(255, 42, 77, 0.9);
+      border-radius: 50%;
+      box-shadow: 0 0 22px rgba(255, 42, 77, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .logo-frame:hover .profile-logo {
+      transform: scale(1.035);
+    }
+
+    .avatar-aura {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .ring-rotate {
+      transform-box: view-box;
+      transform-origin: 50% 50%;
+      animation: rotate 22s linear infinite;
+      will-change: transform;
+    }
+
+    .laser-track {
+      transform-box: view-box;
+      transform-origin: 50% 50%;
+      stroke-dasharray: 2 8 38 8;
+      stroke-dashoffset: 0;
+      animation: dash-travel 8s linear infinite;
+      filter: drop-shadow(0 0 3px #ff5500);
+      will-change: stroke-dashoffset;
+    }
+
+    .energy-pulse {
+      animation: aura-pulse 2.6s ease-in-out infinite;
+      filter: url(#aura-glow);
+      transform-origin: center;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes dash-travel {
+      to { stroke-dashoffset: -112; }
+    }
+
+    @keyframes aura-pulse {
+      0%, 100% { opacity: 0.62; filter: drop-shadow(0 0 3px #ff2a4d) blur(0.2px); }
+      50% { opacity: 1; filter: drop-shadow(0 0 9px #ff2a4d) blur(1px); }
+    }
+
+    .profile-kicker {
+      margin-bottom: 0.45rem;
+      color: var(--accent-bright);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-shadow: 0 0 14px rgba(240, 38, 58, 0.55);
+    }
+
+    h1 {
+      color: var(--ink);
+      font-size: 2.35rem;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      text-shadow: 0 3px 24px rgba(240, 38, 58, 0.38);
+    }
+
+    .profile-tagline {
+      color: var(--muted);
+      text-shadow: none;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .game-id {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 1rem;
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: #e3e9dd;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .game-id strong {
+      color: #ff7780;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    .copy-id-button {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 0;
+      border-radius: 4px;
+      color: #ff7780;
+      background: transparent;
+      cursor: pointer;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .copy-id-button:hover,
+    .copy-id-button:focus-visible {
+      color: #fff;
+      transform: scale(1.1);
+      outline: none;
+    }
+
+    .links-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 2.25rem 0 1rem;
+      color: var(--ink);
+      text-align: right;
+      font-size: 1.05rem;
+    }
+
+    .links-heading::before {
+      content: "";
+      width: 4px;
+      height: 1.2rem;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    #socialLinks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    #socialLinks > .social-card {
+      --platform-color: var(--accent);
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 0.8rem;
+      width: 100%;
+      max-width: none;
+      min-height: 104px;
+      margin: 0;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+      text-decoration: none;
+      background: linear-gradient(115deg, rgba(71, 20, 30, 0.62), rgba(19, 13, 16, 0.96) 68%);
+      border: 1px solid rgba(240, 68, 82, 0.2);
+      border-radius: 8px;
+      box-shadow: inset 0 1px rgba(255,255,255,0.035), 0 8px 24px rgba(0,0,0,0.16);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #socialLinks > .social-card::before {
+      content: "";
+      position: absolute;
+      top: 14px;
+      right: 0;
+      width: 3px;
+      height: 30px;
+      background: var(--platform-color);
+      box-shadow: 0 0 12px var(--platform-color);
+      opacity: 0.8;
+    }
+
+    #socialLinks > .social-card::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      bottom: 0;
+      width: 42px;
+      height: 1px;
+      background: var(--platform-color);
+      opacity: 0.45;
+    }
+
+    #socialLinks > .social-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--accent-bright), transparent 24%);
+      background: linear-gradient(115deg, rgba(110, 22, 37, 0.65), rgba(25, 13, 17, 0.98) 72%);
+      box-shadow: inset 0 1px rgba(255,255,255,0.06), 0 10px 30px rgba(135, 20, 39, 0.2);
+    }
+
+    .social-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      color: var(--platform-color);
+      font-size: 1.7rem;
+    }
+
+    #socialLinks .social-icon i {
+      color: var(--platform-color);
+      text-shadow: none;
+      filter: drop-shadow(0 0 5px var(--platform-color)) drop-shadow(0 0 11px var(--platform-color));
+    }
+
+    .social-copy {
+      min-width: 0;
+    }
+
+    .social-name {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .social-desc {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .social-count {
+      min-width: 78px;
+      text-align: left;
+      border-right: 1px solid var(--line);
+      padding-right: 0.75rem;
+    }
+
+    .count-value {
+      display: block;
+      color: var(--platform-color);
+      font-size: 0.95rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .count-label {
+      display: block;
+      margin-top: 0.1rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    .shop-link,
+    .website-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(255, 105, 115, 0.5);
+      border-radius: 7px;
+      color: #fff;
+      background: linear-gradient(105deg, #99192b, #ed3448 55%, #aa1c30);
+      box-shadow: 0 8px 24px rgba(150, 20, 40, 0.24), inset 0 1px rgba(255,255,255,0.18);
+      font-weight: 700;
+      text-decoration: none;
+      transition: filter 0.18s ease, transform 0.18s ease;
+    }
+
+    .shop-link:hover,
+    .website-link:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 620px) {
+      body { padding: 2rem 1rem 1.5rem; }
+      h1 { font-size: 1.8rem; }
+      .logo-frame { width: 138px; height: 138px; }
+      .profile-logo { width: 104px; height: 104px; }
+      #socialLinks { grid-template-columns: 1fr; }
+      #socialLinks > .social-card { min-height: 92px; }
+    }
+
+    @media (max-width: 768px) {
+      #socialLinks > div {
+        width: 100%;
+        max-width: none;
+      }
+
+      #socialLinks {
+        gap: 1rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      h4 {
+        font-size: 1.5rem;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ambient-haze" aria-hidden="true">
+    <span class="ambient-spot spot-scarlet"></span>
+    <span class="ambient-spot spot-coral"></span>
+    <span class="ambient-spot spot-garnet"></span>
+  </div>
+
+  <div class="section-container">
+    <section data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+      <div class="profile-heading">
+        <div class="logo-frame">
+          <img class="profile-logo" src="images/alk.logo.back.png" alt="شعار القيصر السوري">
+          <svg class="avatar-aura" viewBox="0 0 150 150" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="aura-spectrum" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FF2A4D" />
+                <stop offset="52%" stop-color="#FF5500" />
+                <stop offset="100%" stop-color="#FF2A4D" />
+              </linearGradient>
+              <filter id="aura-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.8" result="soft-glow" />
+                <feMerge>
+                  <feMergeNode in="soft-glow" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <circle class="energy-pulse" cx="75" cy="75" r="59" fill="none" stroke="#FF2A4D" stroke-width="1" />
+            <circle cx="75" cy="75" r="63" fill="none" stroke="#FF5500" stroke-width="0.7" stroke-dasharray="1 7" opacity="0.85" />
+            <circle class="laser-track" cx="75" cy="75" r="67" fill="none" stroke="url(#aura-spectrum)" stroke-width="1.6" />
+            <g class="ring-rotate" filter="url(#aura-glow)">
+              <circle cx="75" cy="75" r="72" fill="none" stroke="url(#aura-spectrum)" stroke-width="1.4" stroke-dasharray="34 9 4 9" />
+              <path d="M75 1v8 M149 75h-8 M75 149v-8 M1 75h8" fill="none" stroke="#FF5500" stroke-width="2" />
+              <path d="M27 27l5 5 M123 27l-5 5 M123 123l-5-5 M27 123l5-5" fill="none" stroke="#FF2A4D" stroke-width="1.5" />
+            </g>
+          </svg>
+        </div>
+        <p class="profile-kicker">FREE FIRE | CONTENT CREATOR</p>
+        <h1>القيصر السوري</h1>
+        <p class="profile-tagline">مسرب غارينا الأسطوري</p>
+        <div class="game-id">
+          <span>Free Fire ID</span>
+          <strong id="freeFireId">606278342</strong>
+          <button class="copy-id-button" id="copyFreeFireId" type="button" aria-label="نسخ معرّف Free Fire" title="نسخ المعرّف">
+            <i class="fas fa-copy" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <h2 class="links-heading">تابعني على منصاتي</h2>
+      <div id="socialLinks"></div>
+      <a class="website-link" href="https://alkysargaming.netlify.app/" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-globe" aria-hidden="true"></i>
+        <span>موقعي الرسمي الذي يحتوي على كل ما يتعلق بي</span>
+        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+      </a>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    if (window.AOS) AOS.init();
+    const container = document.getElementById('socialLinks');
+
+    // Social Links Data
+    const socialLinks = [
+      {
+        name: "قناتي اليوتيوب",
+        url: "https://www.youtube.com/@alkysar_gaming",
+        icon: "fa-youtube",
+        prefix: "fab",
+        color: "#ff4b4b",
+        followers: "65.7 الف",
+        countLabel: "مشترك",
+        desc: "اقوى تجميعات تسريباتي بفيديو كامل و مميز",
+        image: "images/YOU1.jpg"
+      },
+      {
+        name: "تيك توك",
+        url: "https://www.tiktok.com/@alkysar_gaming",
+        icon: "fa-tiktok",
+        prefix: "fab",
+        color: "#f2f2ed",
+        followers: "181.5 الف",
+        countLabel: "متابع",
+        desc: "يوميا تسريب جديد و حصري",
+        image: "images/TIK.jpg"
+      },
+      {
+        name: "انستغرام",
+        url: "https://www.instagram.com/alkysar_gaming",
+        icon: "fa-instagram",
+        prefix: "fab",
+        color: "#f47db1",
+        followers: "75.5 الف",
+        countLabel: "متابع",
+        desc: "صفحتي الانستا للستوريات و كل ما هو جديد و حصري",
+        image: "images/INSTA.jpg"
+      },
+      {
+        name: "قناة الانستغرام",
+        url: "https://www.instagram.com/channel/AbYK0G4sPkxiA_uS/",
+        icon: "fa-instagram",
+        prefix: "fab",
+        followers: "3.2 الف",
+        countLabel: "مشترك",
+        color: "#e1306c",
+        desc: "انضم إلى قناتي على إنستغرام لمتابعة آخر التحديثات"
+      },
+      {
+        name: "ديسكورد",
+        url: "https://discord.gg/C7J9DTxyeg",
+        icon: "fa-discord",
+        prefix: "fab",
+        color: "#9c9eff",
+        followers: "2150",
+        countLabel: "عضو",
+        desc: "مكان خاص لكميونتي فري فاير يشمل كل الي تبغونه من تسريبات و تحتاجونه من معلومات",
+        image: "images/DIS.png"
+      },
+      {
+        name: "كيك",
+        url: "https://kick.com/alkysargaming",
+        icon: "fa-kickstarter-k",
+        prefix: "fab",
+        color: "#52fc18",
+        followers: "72.5 الف",
+        countLabel: "متابع",
+        desc: "تعال احضر بثي و استمتع معي",
+        image: "images/kick.jpg"
+      },
+      /*{
+        name: "الواتساب",
+        url: "https://whatsapp.com/channel/0029VaB727O84OmEMwWV2K3Q",
+        icon: "fa-whatsapp",
+        prefix: "fab",
+        color: "#52d890",
+        followers: "أضف العدد",
+        countLabel: "مشترك",
+        desc: "اي شيئ جديد عني ينزل بقناتي على الواتساب",
+        image: "images/WATS.png"
+      },*/
+      {
+        name: "فيسبوك",
+        url: "https://www.facebook.com/alkysar.gaming",
+        icon: "fa-facebook",
+        prefix: "fab",
+        color: "#2563eb",
+        followers: "1.8 مليون",
+        countLabel: "متابع",
+        desc: "جهد سنين كامل على هذه الصفحة و كل يوم انزل فيها تسريبات خرافية",
+        image: "images/FACE.jpg"
+      },
+      {
+        name: "قناتي الثانية",
+        url: "https://www.youtube.com/@AlkysarFF",
+        icon: "fa-youtube",
+        prefix: "fab",
+        color: "#ef4444",
+        followers: "4.5 الف",
+        countLabel: "متابع",
+        desc: "قناة التحديات الاسطورية والقوية",
+        image: "images/YOU2.jpg"
+      },
+    ];
+
+    socialLinks.forEach((link) => {
+      const card = document.createElement('a');
+      card.className = 'social-card';
+      card.href = link.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.style.setProperty('--platform-color', link.color);
+      const followerLabel = link.followers ? `، ${link.followers} ${link.countLabel || ''}` : '';
+      card.setAttribute('aria-label', `${link.name}${followerLabel}`);
+      card.innerHTML = `
+        <span class="social-icon"><i class="${link.prefix} ${link.icon}" aria-hidden="true"></i></span>
+        <span class="social-copy">
+          <span class="social-name">${link.name}</span>
+          <span class="social-desc">${link.desc}</span>
+        </span>
+        ${link.followers ? `
+          <span class="social-count">
+            <span class="count-value">${link.followers}</span>
+            <span class="count-label">${link.countLabel || ''}</span>
+          </span>
+        ` : ''}
+      `;
+      container.appendChild(card);
+    });
+
+    const copyButton = document.getElementById('copyFreeFireId');
+    const freeFireId = document.getElementById('freeFireId');
+
+    copyButton.addEventListener('click', async () => {
+      let copied = false;
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(freeFireId.textContent.trim());
+          copied = true;
+        } else {
+          const temporaryInput = document.createElement('textarea');
+          temporaryInput.value = freeFireId.textContent.trim();
+          temporaryInput.style.position = 'fixed';
+          temporaryInput.style.opacity = '0';
+          document.body.appendChild(temporaryInput);
+          temporaryInput.select();
+          copied = document.execCommand('copy');
+          temporaryInput.remove();
+        }
+      } catch (error) {
+        copied = false;
+      }
+
+      const icon = copyButton.querySelector('i');
+      icon.className = copied ? 'fas fa-check' : 'fas fa-copy';
+      copyButton.setAttribute('aria-label', copied ? 'تم نسخ معرّف Free Fire' : 'تعذّر نسخ معرّف Free Fire');
+      copyButton.title = copied ? 'تم النسخ' : 'تعذّر النسخ';
+
+      if (copied) {
+        window.setTimeout(() => {
+          icon.className = 'fas fa-copy';
+          copyButton.setAttribute('aria-label', 'نسخ معرّف Free Fire');
+          copyButton.title = 'نسخ المعرّف';
+        }, 1600);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
